@@ -1,0 +1,33 @@
+CREATE OR ALTER   Procedure [dbo].[Sp_CollegeScoreReport]
+	@UserId Int 
+AS
+Begin
+
+	DECLARE @UserGroup TinyInt,@CollegeId Int
+
+	SELECT @UserGroup=A.UserGroup,@CollegeId=A.CollegeId FROM Tbl_Users A
+	WHERE A.Id=@UserId
+
+	IF(@UserGroup IN(3,4,5))
+		SET @UserGroup=5
+
+;WITH Temp As(
+SELECT D.CollegeId,C.EvaluatiONIndexId,Sum(A.Grade)SumGrade 
+FROM Tbl_UserEvaluationFormDetail A INNER JOIN
+Tbl_UserEvaluationForm B ON A.UserEvaluatiONFormId=B.Id INNER JOIN
+Tbl_EvaluationForms C ON B.EvaluationFormId=C.Id INNER JOIN
+Tbl_Users D ON B.UserId=D.Id
+WHERE (C.UserGroup=@UserGroup)AND
+	  (@CollegeId IS NULL OR D.CollegeId=@CollegeId)AND
+	  ((@UserGroup!=5 AND B.UserId!=@UserId) OR @UserGroup=5)
+GROUP BY D.CollegeId,C.EvaluationIndexId
+)
+	SELECT A.CollegeId,B.CollegeName,A.EvaluationIndexId As EvaluationIndexeId,
+	C.Title AS EvaluationIndexeTitle,A.SumGrade,E.SumWeight,A.SumGrade*D.Weight IndexWeight
+	FROM Temp A INNER JOIN
+	Tbl_Colleges B ON A.CollegeId=B.Id INNER JOIN
+	Tbl_EvaluationIndex C ON A.EvaluationIndexId=C.Id INNER JOIN
+	Tbl_EvaluationIndexCollegeWeight D ON A.CollegeId=D.CollegeId AND A.EvaluationIndexId=D.EvaluationIndexId INNER JOIN
+	View_EvaluationIndexGrade E ON A.EvaluationIndexId=E.IndexId AND E.UserGroup=@UserGroup
+
+END

@@ -1,0 +1,5 @@
+CREATE VIEW [dbo].[View_EvaluationIndexGrade]
+AS
+SELECT A.EvaluationIndexId IndexId,A.UserGroup,SUM(B.Weight)SumWeight FROM Tbl_EvaluationForms A INNER JOIN
+Tbl_EvaluationFormQuestions B ON A.Id=B.FormId
+Group By A.EvaluationIndexId,A.UserGroup

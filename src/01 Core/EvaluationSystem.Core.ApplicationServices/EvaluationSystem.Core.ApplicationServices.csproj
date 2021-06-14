@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Students\**" />
+    <EmbeddedResource Remove="Students\**" />
+    <None Remove="Students\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\00 Utilities\EvaluationSystem.Utilities\EvaluationSystem.Utilities.csproj" />
+    <ProjectReference Include="..\EvaluationSystem.Core.Domain\EvaluationSystem.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

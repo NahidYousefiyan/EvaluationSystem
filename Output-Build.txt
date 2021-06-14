@@ -1,0 +1,8 @@
+﻿Build started...
+1>------ Build started: Project: EvaluationSystem.Infra.DAL.SQL, Configuration: Debug Any CPU ------
+1>EvaluationSystem.Infra.DAL.SQL -> D:\MyProjects\src\02 Infra\DAL\EvaluationSystem.Infra.DAL.SQL\bin\Debug\net5.0\EvaluationSystem.Infra.DAL.SQL.dll
+2>------ Build started: Project: EvaluationSystem.EndPoints.PanelWebApi, Configuration: Debug Any CPU ------
+2>D:\MyProjects\src\03 EndPoints\EvaluationSystem.EndPoints.PanelWebApi\Controllers\AccountController.cs(28,42,28,47): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+2>EvaluationSystem.EndPoints.PanelWebApi -> D:\MyProjects\src\03 EndPoints\EvaluationSystem.EndPoints.PanelWebApi\bin\Debug\net5.0\EvaluationSystem.EndPoints.PanelWebApi.dll
+2>Done building project "EvaluationSystem.EndPoints.PanelWebApi.csproj".
+========== Build: 2 succeeded, 0 failed, 5 up-to-date, 0 skipped ==========
